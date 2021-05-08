@@ -1,7 +1,7 @@
 /*
  * @Author: rachelzhang
  * @Date: 2021-04-27 19:06:04
- * @LastEditTime: 2021-05-06 12:44:53
+ * @LastEditTime: 2021-05-08 14:10:36
  * @LastEditors: Please set LastEditors
  * @Description: vite.config
  * @FilePath: \tvu-drive-frontend\vite.config.ts
@@ -9,20 +9,30 @@
 import type { UserConfig, ConfigEnv } from 'vite';
 import { loadEnv } from 'vite';
 import { resolve } from 'path';
+import { generateModifyVars } from './build/generate/generateModifyVars';
 import { createVitePlugins } from './build/vite/plugin';
 import { wrapperEnv } from './build/utils';
 import { createProxy } from './build/vite/proxy';
 import { OUTPUT_DIR } from './build/constant';
 
+import pkg from './package.json';
+import moment from 'moment';
+
 function pathResolve(dir: string) {
   return resolve(process.cwd(), '.', dir);
 }
+const { dependencies, devDependencies, name, version } = pkg;
+const __APP_INFO__ = {
+  pkg: { dependencies, devDependencies, name, version },
+  lastBuildTime: moment().format('YYYY-MM-DD HH:mm:ss'),
+};
 // https://vitejs.dev/config/
 export default ({ command, mode }: ConfigEnv): UserConfig => {
   const root = process.cwd();
   const env = loadEnv(mode, root);
   // The boolean type read by loadEnv is a string. This function can be converted to boolean type
   const viteEnv = wrapperEnv(env);
+  const isBuild = command === 'build';
   const { VITE_PORT, VITE_PUBLIC_PATH, VITE_PROXY, VITE_DROP_CONSOLE } = viteEnv;
   return {
     base: VITE_PUBLIC_PATH,
@@ -91,7 +101,7 @@ export default ({ command, mode }: ConfigEnv): UserConfig => {
         'ant-design-vue/es/locale/en_US',
         'moment/dist/locale/eu',
       ],
-      exclude: ['vue-demi'],
+      exclude: ['vue-demi','consolidate'],
     },
   };
 }

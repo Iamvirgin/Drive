@@ -1,13 +1,13 @@
 <!--
- * @Author: your name
+ * @Author: rachelzhang
  * @Date: 2021-04-27 19:06:04
- * @LastEditTime: 2021-04-30 12:27:23
+ * @LastEditTime: 2021-05-07 19:08:17
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \tvu-drive-frontend\src\App.vue
 -->
 <template>
-  <ConfigProvider v-bind="lockEvent" :locale="getAntdLocale">
+  <ConfigProvider :locale="getAntdLocale">
     <AppProvider>
       <RouterView />
     </AppProvider>
@@ -15,24 +15,19 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue'
+import { defineComponent } from 'vue';
 import { ConfigProvider } from 'ant-design-vue';
-  // import { AppProvider } from '/@/components/Application';
-import HelloWorld from './components/HelloWorld.vue'
+import { useTitle } from '/@/hooks/web/useTitle';
+import { useLocale } from '/@/locales/useLocale';
+import { AppProvider } from '/@/components/AppProvider';
 
 export default defineComponent({
   name: 'App',
-  components: { ConfigProvider}
-})
+  components: { ConfigProvider, AppProvider },
+  setup() {
+    useTitle();
+    const { getAntdLocale } = useLocale();
+    return { getAntdLocale };
+  },
+});
 </script>
-
-<style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
-</style>

@@ -1,74 +1,64 @@
+<!--
+ * @Author: rachelzhang
+ * @Date: 2021-05-06 19:03:04
+ * @LastEditTime: 2021-05-08 17:06:40
+ * @LastEditors: Please set LastEditors
+ * @Description: App Provider
+ * @FilePath: \tvu-drive-frontend\src\components\AppProvider.vue
+-->
 <script lang="ts">
-  import { defineComponent, toRefs, ref, unref } from 'vue';
+import { defineComponent, toRefs, ref, unref } from 'vue';
 
-  import { createAppProviderContext } from './useAppContext';
+// import { createAppProviderContext } from './useAppContext';
 
-  import { prefixCls } from '/@/settings/designSetting';
-  import { createBreakpointListen } from '/@/hooks/event/useBreakpoint';
-  import { propTypes } from '/@/utils/propTypes';
-  import { useAppStore } from '/@/store/modules/app';
-  import { MenuModeEnum, MenuTypeEnum } from '/@/enums/menuEnum';
+import { prefixCls } from '/@/settings/designSetting';
+import { createBreakpointListen } from '/@/hooks/event/useBreakpoint';
+import { propTypes } from '/@/utils/propTypes';
+// import { useAppStore } from '/@/store/modules/app';
 
-  export default defineComponent({
-    name: 'AppProvider',
-    inheritAttrs: false,
-    props: {
-      prefixCls: propTypes.string.def(prefixCls),
-    },
-    setup(props, { slots }) {
-      const isMobile = ref(false);
-      const isSetState = ref(false);
+export default defineComponent({
+  name: 'AppProvider',
+  inheritAttrs: false,
+  props: {
+    prefixCls: propTypes.string.def(prefixCls),
+  },
+  setup(props, { slots }) {
 
-      const appStore = useAppStore();
+    const isSetState = ref(false);
 
-      createBreakpointListen(({ screenMap, sizeEnum, width }) => {
-        const lgWidth = screenMap.get(sizeEnum.LG);
-        if (lgWidth) {
-          isMobile.value = width.value - 1 < lgWidth;
-        }
-        handleRestoreState();
-      });
+    const appStore = useAppStore();
 
-      const { prefixCls } = toRefs(props);
-      createAppProviderContext({ prefixCls, isMobile });
-
-      function handleRestoreState() {
-        if (unref(isMobile)) {
-          if (!unref(isSetState)) {
-            isSetState.value = true;
-            const {
-              menuSetting: {
-                type: menuType,
-                mode: menuMode,
-                collapsed: menuCollapsed,
-                split: menuSplit,
-              },
-            } = appStore.getProjectConfig;
-            appStore.setProjectConfig({
-              menuSetting: {
-                type: MenuTypeEnum.SIDEBAR,
-                mode: MenuModeEnum.INLINE,
-                split: false,
-              },
-            });
-            appStore.setBeforeMiniInfo({ menuMode, menuCollapsed, menuType, menuSplit });
-          }
-        } else {
-          if (unref(isSetState)) {
-            isSetState.value = false;
-            const { menuMode, menuCollapsed, menuType, menuSplit } = appStore.getBeforeMiniInfo;
-            appStore.setProjectConfig({
-              menuSetting: {
-                type: menuType,
-                mode: menuMode,
-                collapsed: menuCollapsed,
-                split: menuSplit,
-              },
-            });
-          }
-        }
+    createBreakpointListen(({ screenMap, sizeEnum, width }) => {
+      const lgWidth = screenMap.get(sizeEnum.LG);
+      if (lgWidth) {
+        isMobile.value = width.value - 1 < lgWidth;
       }
-      return () => slots.default?.();
-    },
-  });
+      handleRestoreState();
+    });
+
+    const { prefixCls } = toRefs(props);
+    createAppProviderContext({ prefixCls });
+
+    function handleRestoreState() {
+      if (unref(isSetState)) {
+        isSetState.value = false;
+        const {
+          menuMode,
+          menuCollapsed,
+          menuType,
+          menuSplit,
+        } = appStore.getBeforeMiniInfo;
+        appStore.setProjectConfig({
+          menuSetting: {
+            type: menuType,
+            mode: menuMode,
+            collapsed: menuCollapsed,
+            split: menuSplit,
+          },
+        });
+      }
+    }
+    return () => slots.default?.();
+  },
+});
 </script>

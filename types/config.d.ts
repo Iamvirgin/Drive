@@ -1,4 +1,4 @@
-import { MenuTypeEnum, MenuModeEnum, TriggerEnum, MixSidebarTriggerEnum } from '/@/enums/menuEnum';
+
 import {
   ContentEnum,
   PermissionModeEnum,
@@ -11,35 +11,6 @@ import { CacheTypeEnum } from '/@/enums/cacheEnum';
 
 export type LocaleType = 'zh_CN' | 'en' | 'ru' | 'ja' | 'ko';
 
-export interface MenuSetting {
-  bgColor: string;
-  fixed: boolean;
-  collapsed: boolean;
-  canDrag: boolean;
-  show: boolean;
-  hidden: boolean;
-  split: boolean;
-  menuWidth: number;
-  mode: MenuModeEnum;
-  type: MenuTypeEnum;
-  theme: ThemeEnum;
-  topMenuAlign: 'start' | 'center' | 'end';
-  trigger: TriggerEnum;
-  accordion: boolean;
-  closeMixSidebarOnChange: boolean;
-  collapsedShowTitle: boolean;
-  mixSideTrigger: MixSidebarTriggerEnum;
-  mixSideFixed: boolean;
-}
-
-export interface MultiTabsSetting {
-  cache: boolean;
-  show: boolean;
-  showQuick: boolean;
-  canDrag: boolean;
-  showRedo: boolean;
-  showFold: boolean;
-}
 
 export interface HeaderSetting {
   bgColor: string;
@@ -107,7 +78,6 @@ export interface ProjectConfig {
   // menuType: MenuTypeEnum;
   headerSetting: HeaderSetting;
   // menuSetting
-  menuSetting: MenuSetting;
   // Multi-tab settings
   multiTabsSetting: MultiTabsSetting;
   // Animation configuration
