@@ -8,8 +8,9 @@
  */
 import type { App } from 'vue';
 import { createRouter, createWebHashHistory, RouteRecordRaw } from 'vue-router'
-// import { REDIRECT_NAME } from './constant';
-const WHITE_NAME_LIST = [ REDIRECT_NAME];
+import { basicRoutes } from './routers';
+import { REDIRECT_NAME } from './constant';
+const WHITE_NAME_LIST = [REDIRECT_NAME];
 // app router
 const router = createRouter({
   history: createWebHashHistory(import.meta.env.VITE_PUBLIC_PATH),
