@@ -1,8 +1,16 @@
+/*
+ * @Author:rachel zhang
+ * @Date: 2021-05-10 09:47:52
+ * @LastEditTime: 2021-05-13 16:46:45
+ * @LastEditors: Please set LastEditors
+ * @Description: In User Settings Edit
+ * @FilePath: \tvu-drive-frontend\src\logics\initAppConfig.ts
+ */
 /**
  * Application configuration
  */
 import type { ProjectConfig } from '/#/config';
-
+// Project Config Setting
 import { PROJ_CFG_KEY } from '/@/enums/cacheEnum';
 import projectSetting from '/@/settings/projectSetting';
 
@@ -26,6 +34,7 @@ import { ThemeEnum } from '/@/enums/appEnum';
 export function initAppConfigStore() {
   const localeStore = useLocaleStore();
   const appStore = useAppStore();
+  // 类型断言语法as 
   let projCfg: ProjectConfig = Persistent.getLocal(PROJ_CFG_KEY) as ProjectConfig;
   projCfg = deepMerge(projectSetting, projCfg || {});
   const darkMode = appStore.getDarkMode;
@@ -33,7 +42,6 @@ export function initAppConfigStore() {
     colorWeak,
     grayMode,
     themeColor,
-
     headerSetting: { bgColor: headerBgColor } = {},
     menuSetting: { bgColor } = {},
   } = projCfg;

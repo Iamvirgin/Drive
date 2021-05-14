@@ -1,7 +1,8 @@
 
 import {
+  MenuTypeEnum,
+  MultiTabsSetting,
   ContentEnum,
-  PermissionModeEnum,
   ThemeEnum,
   RouterTransitionEnum,
   SettingButtonPositionEnum,
@@ -11,6 +12,35 @@ import { CacheTypeEnum } from '/@/enums/cacheEnum';
 
 export type LocaleType = 'zh_CN' | 'en' | 'ru' | 'ja' | 'ko';
 
+export interface MenuSetting {
+  bgColor: string;
+  fixed: boolean;
+  collapsed: boolean;
+  canDrag: boolean;
+  show: boolean;
+  hidden: boolean;
+  split: boolean;
+  menuWidth: number;
+  mode: MenuModeEnum;
+  type: MenuTypeEnum;
+  theme: ThemeEnum;
+  topMenuAlign: 'start' | 'center' | 'end';
+  trigger: TriggerEnum;
+  accordion: boolean;
+  closeMixSidebarOnChange: boolean;
+  collapsedShowTitle: boolean;
+  mixSideTrigger: MixSidebarTriggerEnum;
+  mixSideFixed: boolean;
+}
+
+export interface MultiTabsSetting {
+  cache: boolean;
+  show: boolean;
+  showQuick: boolean;
+  canDrag: boolean;
+  showRedo: boolean;
+  showFold: boolean;
+}
 
 export interface HeaderSetting {
   bgColor: string;
@@ -58,15 +88,16 @@ export interface ProjectConfig {
   showDarkModeToggle: boolean;
   // Configure where the button is displayed
   settingButtonPosition: SettingButtonPositionEnum;
-  // Permission mode
-  permissionMode: PermissionModeEnum;
   // Website gray mode, open for possible mourning dates
   grayMode: boolean;
   // Whether to turn on the color weak mode
   colorWeak: boolean;
   // Theme color
   themeColor: string;
-
+  // menuSetting
+  menuSetting: MenuSetting;
+  // Multi-tab settings
+  multiTabsSetting: MultiTabsSetting;
   // The main interface is displayed in full screen, the menu is not displayed, and the top
   fullContent: boolean;
   // content width

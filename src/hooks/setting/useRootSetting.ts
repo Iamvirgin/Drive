@@ -1,3 +1,11 @@
+/*
+ * @Author: rachelzhang
+ * @Date: 2021-05-10 09:47:51
+ * @LastEditTime: 2021-05-14 14:18:21
+ * @LastEditors: Please set LastEditors
+ * @Description: In User Settings Edit
+ * @FilePath: \tvu-drive-frontend\src\hooks\setting\useRootSetting.ts
+ */
 import type { ProjectConfig } from '/#/config';
 
 import { computed } from 'vue';
@@ -20,8 +28,6 @@ export function useRootSetting() {
   const getSettingButtonPosition = computed(() => appStore.getProjectConfig.settingButtonPosition);
 
   const getCanEmbedIFramePage = computed(() => appStore.getProjectConfig.canEmbedIFramePage);
-
-  const getPermissionMode = computed(() => appStore.getProjectConfig.permissionMode);
 
   const getShowLogo = computed(() => appStore.getProjectConfig.showLogo);
 
@@ -68,7 +74,6 @@ export function useRootSetting() {
   }
   return {
     setRootSetting,
-
     getSettingButtonPosition,
     getFullContent,
     getColorWeak,
@@ -77,7 +82,6 @@ export function useRootSetting() {
     getPageLoading,
     getOpenKeepAlive,
     getCanEmbedIFramePage,
-    getPermissionMode,
     getShowLogo,
     getUseErrorHandle,
     getShowBreadCrumb,
