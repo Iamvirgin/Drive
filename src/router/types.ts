@@ -1,4 +1,5 @@
 import type { RouteRecordRaw } from 'vue-router';
+import { RoleEnum } from '/@/enums/roleEnum';
 
 import { defineComponent } from 'vue';
 
@@ -12,10 +13,14 @@ export interface RouteMeta {
   title: string;
   // Whether to ignore permissions
   ignoreAuth?: boolean;
+  // role info
+  roles?: RoleEnum[];
   // Whether not to cache
   ignoreKeepAlive?: boolean;
   // Is it fixed on tab
   affix?: boolean;
+  // icon on tab
+  icon?: string;
 
   frameSrc?: string;
 
@@ -24,6 +29,9 @@ export interface RouteMeta {
 
   // Whether the route has been dynamically added
   hideBreadcrumb?: boolean;
+
+  // Hide submenu
+  hideChildrenInMenu?: boolean;
 
   // Carrying parameters
   carryParam?: boolean;
@@ -71,6 +79,8 @@ export interface Menu {
   children?: Menu[];
 
   orderNo?: number;
+
+  roles?: RoleEnum[];
 
   meta?: Partial<RouteMeta>;
 

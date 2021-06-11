@@ -1,8 +1,7 @@
-
+import { MenuTypeEnum, MenuModeEnum, TriggerEnum, MixSidebarTriggerEnum } from '/@/enums/menuEnum';
 import {
-  MenuTypeEnum,
-  MultiTabsSetting,
   ContentEnum,
+  PermissionModeEnum,
   ThemeEnum,
   RouterTransitionEnum,
   SettingButtonPositionEnum,
@@ -88,16 +87,15 @@ export interface ProjectConfig {
   showDarkModeToggle: boolean;
   // Configure where the button is displayed
   settingButtonPosition: SettingButtonPositionEnum;
+  // Permission mode
+  permissionMode: PermissionModeEnum;
   // Website gray mode, open for possible mourning dates
   grayMode: boolean;
   // Whether to turn on the color weak mode
   colorWeak: boolean;
   // Theme color
   themeColor: string;
-  // menuSetting
-  menuSetting: MenuSetting;
-  // Multi-tab settings
-  multiTabsSetting: MultiTabsSetting;
+
   // The main interface is displayed in full screen, the menu is not displayed, and the top
   fullContent: boolean;
   // content width
@@ -109,6 +107,7 @@ export interface ProjectConfig {
   // menuType: MenuTypeEnum;
   headerSetting: HeaderSetting;
   // menuSetting
+  menuSetting: MenuSetting;
   // Multi-tab settings
   multiTabsSetting: MultiTabsSetting;
   // Animation configuration

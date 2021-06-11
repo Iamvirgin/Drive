@@ -1,3 +1,11 @@
+/*
+ * @Author: rachel zhang
+ * @Date: 2021-06-01 18:24:24
+ * @LastEditTime: 2021-06-02 10:57:15
+ * @LastEditors: Please set LastEditors
+ * @Description: In User Settings Edit
+ * @FilePath: \tvu-drive-frontend\src\hooks\setting\index.ts
+ */
 import type { GlobConfig } from '/#/config';
 
 import { warn } from '/@/utils/log';

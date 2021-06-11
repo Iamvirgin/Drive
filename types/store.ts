@@ -1,12 +1,5 @@
-/*
- * @Author: rachelzhang
- * @Date: 2021-05-06 15:06:49
- * @LastEditTime: 2021-05-08 17:05:07
- * @LastEditors: Please set LastEditors
- * @Description: In User Settings Edit
- * @FilePath: \tvu-drive-frontend\types\store.ts
- */
 import { ErrorTypeEnum } from '/@/enums/exceptionEnum';
+import { MenuModeEnum, MenuTypeEnum } from '/@/enums/menuEnum';
 
 // Lock screen information
 export interface LockInfo {
@@ -46,4 +39,6 @@ export interface UserInfo {
 export interface BeforeMiniState {
   menuCollapsed?: boolean;
   menuSplit?: boolean;
+  menuMode?: MenuModeEnum;
+  menuType?: MenuTypeEnum;
 }

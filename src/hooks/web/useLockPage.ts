@@ -1,24 +1,16 @@
-/*
- * @Author: your name
- * @Date: 2021-05-10 09:47:51
- * @LastEditTime: 2021-05-14 18:43:43
- * @LastEditors: Please set LastEditors
- * @Description: In User Settings Edit
- * @FilePath: \tvu-drive-frontend\src\hooks\web\useLockPage.ts
- */
 import { computed, onUnmounted, unref, watchEffect } from 'vue';
 import { useThrottleFn } from '@vueuse/core';
 
 import { useAppStore } from '/@/store/modules/app';
 import { useLockStore } from '/@/store/modules/lock';
 
-// import { useUserStore } from '/@/store/modules/user';
+import { useUserStore } from '/@/store/modules/user';
 import { useRootSetting } from '../setting/useRootSetting';
 
 export function useLockPage() {
   const { getLockTime } = useRootSetting();
   const lockStore = useLockStore();
-  // const userStore = useUserStore();
+  const userStore = useUserStore();
   const appStore = useAppStore();
 
   let timeId: TimeoutHandle;
@@ -29,10 +21,10 @@ export function useLockPage() {
 
   function resetCalcLockTimeout(): void {
     // not login
-    // if (!userStore.getToken) {
-    //   clear();
-    //   return;
-    // }
+    if (!userStore.getToken) {
+      clear();
+      return;
+    }
     const lockTime = appStore.getProjectConfig.lockTime;
     if (!lockTime || lockTime < 1) {
       clear();
@@ -53,11 +45,11 @@ export function useLockPage() {
   }
 
   watchEffect((onClean) => {
-    // if (userStore.getToken) {
-    resetCalcLockTimeout();
-    // } else {
-    //   clear();
-    // }
+    if (userStore.getToken) {
+      resetCalcLockTimeout();
+    } else {
+      clear();
+    }
     onClean(() => {
       clear();
     });

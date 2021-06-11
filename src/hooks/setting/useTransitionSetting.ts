@@ -1,11 +1,3 @@
-/*
- * @Author: your name
- * @Date: 2021-05-10 09:47:51
- * @LastEditTime: 2021-05-13 17:44:51
- * @LastEditors: your name
- * @Description: In User Settings Edit
- * @FilePath: \tvu-drive-frontend\src\hooks\setting\useTransitionSetting.ts
- */
 import type { TransitionSetting } from '/#/config';
 
 import { computed } from 'vue';
@@ -30,6 +22,7 @@ export function useTransitionSetting() {
   }
   return {
     setTransitionSetting,
+
     getEnableTransition,
     getOpenNProgress,
     getOpenPageLoading,

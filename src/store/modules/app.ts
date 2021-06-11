@@ -18,15 +18,15 @@ interface AppState {
   // project config
   projectConfig: ProjectConfig | null;
   // When the window shrinks, remember some states, and restore these states when the window is restored
-  beforeMiniInfo: BeforeMiniState; //初始存储信息
+  beforeMiniInfo: BeforeMiniState;
 }
 let timeId: TimeoutHandle;
 export const useAppStore = defineStore({
   id: 'app',
   state: (): AppState => ({
-    darkMode: undefined, //夜间模式
-    pageLoading: false,  //loading
-    projectConfig: Persistent.getLocal(PROJ_CFG_KEY), //本地配置
+    darkMode: undefined,
+    pageLoading: false,
+    projectConfig: Persistent.getLocal(PROJ_CFG_KEY),
     beforeMiniInfo: {},
   }),
   getters: {

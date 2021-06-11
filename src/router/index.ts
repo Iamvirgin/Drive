@@ -1,25 +1,30 @@
 /*
- * @Author: rachelzhang
- * @Date: 2021-04-28 13:35:26
- * @LastEditTime: 2021-05-06 12:36:00
- * @LastEditors: Please set LastEditors
+ * @Author: your name
+ * @Date: 2021-06-01 18:24:24
+ * @LastEditTime: 2021-06-04 12:18:39
+ * @LastEditors: your name
  * @Description: In User Settings Edit
  * @FilePath: \tvu-drive-frontend\src\router\index.ts
  */
+import type { RouteRecordRaw } from 'vue-router';
 import type { App } from 'vue';
-import { createRouter, createWebHashHistory, RouteRecordRaw } from 'vue-router'
-import { basicRoutes } from './routers';
+
+import { createRouter, createWebHashHistory } from 'vue-router';
+import { basicRoutes, LoginRoute } from './routes';
 import { REDIRECT_NAME } from './constant';
-const WHITE_NAME_LIST = [REDIRECT_NAME];
+
+const WHITE_NAME_LIST = [LoginRoute.name, REDIRECT_NAME];
+
 // app router
 const router = createRouter({
   history: createWebHashHistory(import.meta.env.VITE_PUBLIC_PATH),
+  // basicRoutes = [LoginRoute, RootRoute, ...mainOutRoutes, REDIRECT_ROUTE];
   routes: (basicRoutes as unknown) as RouteRecordRaw[],
   strict: true,
   scrollBehavior: () => ({ left: 0, top: 0 }),
 });
 
-// reset router
+// 重置路由
 export function resetRouter() {
   router.getRoutes().forEach((route) => {
     const { name } = route;
@@ -28,6 +33,7 @@ export function resetRouter() {
     }
   });
 }
+
 // config router
 export function setupRouter(app: App<Element>) {
   app.use(router);
